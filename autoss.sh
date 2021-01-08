@@ -149,14 +149,6 @@ run_ssgmr(){
 go_workspace(){
   mkdir ~/.ssmgr/
   cd ~/.ssmgr/
-  if [[ ${PM} = "apt" ]]; then
-  apt update -y
-  apt install -y libsodium-dev
-  elif [[ ${PM} = "yum" ]]; then
-yum update -y
-yum install libsodium -y
-  fi
-  
 }
 
 run_redis(){
@@ -187,8 +179,16 @@ main(){
     run_ssgmr
     systemctl stop firewalld # stop firewall
     systemctl disable firewalld
+  
   fi
 }
 
 # start run script
 main
+if [[ ${PM} = "apt" ]]; then
+  apt update -y
+  apt install -y libsodium-dev
+  elif [[ ${PM} = "yum" ]]; then
+yum update -y
+yum install libsodium -y
+  fi
