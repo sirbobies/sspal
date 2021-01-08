@@ -55,18 +55,15 @@ install_shadowsocks(){
   init_release
   #statements
   if [[ ${PM} = "apt" ]]; then
-    apt update -y
     apt-get install dnsutils -y
     apt install net-tools -y
     apt install python3-pip -y
-    apt install -y libsodium-dev
+
     echo "#!/bin/sh -e" >> /etc/rc.local
   elif [[ ${PM} = "yum" ]]; then
-    yum update -y
     yum install bind-utils -y
     yum install net-tools -y
     yum install python-setuptools -y && easy_install pip
-    yum install libsodium -y
     yum install python3-pip -y
     chmod +x /etc/rc.d/rc.local
   fi
@@ -152,6 +149,14 @@ run_ssgmr(){
 go_workspace(){
   mkdir ~/.ssmgr/
   cd ~/.ssmgr/
+  if [[ ${PM} = "apt" ]]; then
+  apt update -y
+  apt install -y libsodium-dev
+  elif [[ ${PM} = "yum" ]]; then
+yum update -y
+yum install libsodium -y
+  fi
+  
 }
 
 run_redis(){
