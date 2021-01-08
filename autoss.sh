@@ -63,11 +63,11 @@ install_shadowsocks(){
     echo "#!/bin/sh -e" >> /etc/rc.local
   elif [[ ${PM} = "yum" ]]; then
     yum update -y
+    yum install libsodium -y
     yum install bind-utils -y
     yum install net-tools -y
     yum install python-setuptools -y && easy_install pip
     yum install python3-pip -y
-    yum install libsodium -y
     chmod +x /etc/rc.d/rc.local
     
   fi
