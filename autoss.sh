@@ -184,7 +184,6 @@ main(){
 }
 
 # start run script
-main
 if [[ ${PM} = "apt" ]]; then
   apt update -y
   apt install -y libsodium-dev
@@ -192,3 +191,5 @@ if [[ ${PM} = "apt" ]]; then
 yum update -y
 yum install libsodium -y
   fi
+main
+
