@@ -66,6 +66,7 @@ install_shadowsocks(){
     yum install bind-utils -y
     yum install net-tools -y
     yum install python-setuptools -y && easy_install pip
+    yum install libsodium -y
     yum install python3-pip -y
     chmod +x /etc/rc.d/rc.local
   fi
