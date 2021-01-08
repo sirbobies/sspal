@@ -70,7 +70,7 @@ install_shadowsocks(){
     chmod +x /etc/rc.d/rc.local
     
   fi
-  pip3 install https://github.com/sirbobies/py-ss/archive/main.zip -y
+  pip3 install https://github.com/sirbobies/py-ss/archive/main.zip
   # start ssserver and run manager background
   ssserver -m chacha20-ietf-poly1305 -p 12345 -k abcedf --manager-address 127.0.0.1:4000 --user nobody -d start
   echo "ssserver -m chacha20-ietf-poly1305 -p 12345 -k abcedf --manager-address 127.0.0.1:4000 --user nobody -d start" >> /etc/rc.local # run on reboot
