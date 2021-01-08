@@ -64,6 +64,7 @@ install_shadowsocks(){
     echo "#!/bin/sh -e" >> /etc/rc.local
   elif [[ ${PM} = "yum" ]]; then
     yum update -y
+    yum install epel-release -y
     yum install -y libsodium
     yum install bind-utils -y
     yum install net-tools -y
@@ -160,7 +161,6 @@ run_redis(){
     apt-get install redis -y # install redis
     nohup redis-server &
   elif [[ ${PM} = "yum" ]]; then
-    yum install epel-release -y
     yum update -y
     yum install redis -y
     systemctl start redis
