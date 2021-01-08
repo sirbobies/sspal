@@ -63,7 +63,6 @@ install_shadowsocks(){
     echo "#!/bin/sh -e" >> /etc/rc.local
   elif [[ ${PM} = "yum" ]]; then
     yum update -y
-    yum install libsodium -y
     yum install bind-utils -y
     yum install net-tools -y
     yum install python-setuptools -y && easy_install pip
@@ -72,6 +71,10 @@ install_shadowsocks(){
     
   fi
   pip3 install https://github.com/sirbobies/py-ss/archive/main.zip
+  
+   elif [[ ${PM} = "yum" ]]; then
+    yum install libsodium -y
+   fi
   # start ssserver and run manager background
   ssserver -m chacha20-ietf-poly1305 -p 12345 -k abcedf --manager-address 127.0.0.1:4000 --user nobody -d start
   echo "ssserver -m chacha20-ietf-poly1305 -p 12345 -k abcedf --manager-address 127.0.0.1:4000 --user nobody -d start" >> /etc/rc.local # run on reboot
