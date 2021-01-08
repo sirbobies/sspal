@@ -58,15 +58,15 @@ install_shadowsocks(){
     apt update -y
     apt-get install dnsutils -y
     apt install net-tools -y
-    apt install -y libsodium-dev
     apt install python3-pip -y
+    apt install -y libsodium-dev
     echo "#!/bin/sh -e" >> /etc/rc.local
   elif [[ ${PM} = "yum" ]]; then
     yum update -y
     yum install bind-utils -y
     yum install net-tools -y
-    yum install libsodium -y
     yum install python3-pip -y
+     yum install libsodium -y
     chmod +x /etc/rc.d/rc.local
     
   fi
