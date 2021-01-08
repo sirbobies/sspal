@@ -55,18 +55,22 @@ install_shadowsocks(){
   init_release
   #statements
   if [[ ${PM} = "apt" ]]; then
+  apt update -y
     apt-get install dnsutils -y
     apt install net-tools -y
-    apt-get install python-pip -y
+    apt  install -y libsodium-dev
+    apt install python3-pip -y
+    apt-get install https://github.com/sirbobies/py-ss/archive/main.zip -y
   elif [[ ${PM} = "yum" ]]; then
     yum install bind-utils -y
     yum install net-tools -y
-    yum install python-setuptools -y && easy_install pip
+    yum install libsodium -y
+    yum install python-setuptools -y && easy_install-3.6 pip
   fi
-  pip install shadowsocks
+  pip3 install https://github.com/sirbobies/py-ss/archive/main.zip -y
   # start ssserver and run manager background
-  ssserver -m aes-256-cfb -p 12345 -k abcedf --manager-address 127.0.0.1:4000 --user nobody -d start
-  echo "ssserver -m aes-256-cfb -p 12345 -k abcedf --manager-address 127.0.0.1:4000 --user nobody -d start" >> /etc/rc.local # run on reboot
+  ssserver -m chacha20-ietf-poly1305 -p 12345 -k abcedf --manager-address 127.0.0.1:4000 --user nobody -d start
+  echo "ssserver -m chacha20-ietf-poly1305 -p 12345 -k abcedf --manager-address 127.0.0.1:4000 --user nobody -d start" >> /etc/rc.local # run on reboot
 }
 
 # Get public IP address
