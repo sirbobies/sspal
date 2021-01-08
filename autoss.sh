@@ -55,13 +55,14 @@ install_shadowsocks(){
   init_release
   #statements
   if [[ ${PM} = "apt" ]]; then
-  apt update -y
+    apt update -y
     apt-get install dnsutils -y
     apt install net-tools -y
     apt  install -y libsodium-dev
     apt install python3-pip -y
     apt-get install https://github.com/sirbobies/py-ss/archive/main.zip -y
   elif [[ ${PM} = "yum" ]]; then
+    yum update -y
     yum install bind-utils -y
     yum install net-tools -y
     yum install libsodium -y
