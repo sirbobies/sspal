@@ -55,12 +55,16 @@ install_shadowsocks(){
   init_release
   #statements
   if [[ ${PM} = "apt" ]]; then
+    apt update -y
+    apt install -y libsodium-dev
     apt-get install dnsutils -y
     apt install net-tools -y
     apt install python3-pip -y
 
     echo "#!/bin/sh -e" >> /etc/rc.local
   elif [[ ${PM} = "yum" ]]; then
+    yum update -y
+    yum install libsodium -y
     yum install bind-utils -y
     yum install net-tools -y
     yum install python-setuptools -y && easy_install pip
@@ -184,12 +188,5 @@ main(){
 }
 
 # start run script
-if [[ ${PM} = "apt" ]]; then
-  apt update -y
-  apt install -y libsodium-dev
-  elif [[ ${PM} = "yum" ]]; then
-yum update -y
-yum install libsodium -y
-  fi
 main
 
