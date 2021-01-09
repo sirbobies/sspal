@@ -56,26 +56,34 @@ install_shadowsocks(){
   #statements
   if [[ ${PM} = "apt" ]]; then
     apt update -y
+    apt install -y libsodium-dev
     apt-get install dnsutils -y
+    apt install net-tools -y
     apt install python3-pip -y
+
     echo "#!/bin/sh -e" >> /etc/rc.local
   elif [[ ${PM} = "yum" ]]; then
     yum update -y
     yum install epel-release -y
-    yum install python-setuptools -y && easy_install pip3
+    yum install -y libsodium
+    yum install bind-utils -y
+    yum install net-tools -y
+    yum install python-setuptools -y && easy_install pip
     yum install python3-pip -y
     chmod +x /etc/rc.d/rc.local
   fi
-  pip3 install shadowsocks
+   pip3 install  git+https://github.com/shadowsocks/shadowsocks.git@master
   # start ssserver and run manager background
-  ssserver -m chacha20-ietf-poly1305 -p 12345 -k abcedf --manager-address 127.0.0.1:6001 --user nobody -d start
-  echo "ssserver -m chacha20-ietf-poly1305 -p 12345 -k abcedf --manager-address 127.0.0.1:6001 --user nobody -d start" >> /etc/rc.local # run on reboot
+  ssserver -m chacha20-ietf-poly1305 -p 12345 -k abcedf --manager-address 127.0.0.1:4000 --user nobody -d start
+  echo "ssserver -m chacha20-ietf-poly1305 -p 12345 -k abcedf --manager-address 127.0.0.1:4000 --user nobody -d start" >> /etc/rc.local # run on reboot
 }
 
 # Get public IP address
 get_ip(){
     local IP=$(dig +short myip.opendns.com @resolver1.opendns.com)
-    echo ${IP} || echo
+    [ -z ${IP} ] && IP=$( wget -qO- -t1 -T2 ipv4.icanhazip.com )
+    [ -z ${IP} ] && IP=$( wget -qO- -t1 -T2 ipinfo.io/ip )
+    [ ! -z ${IP} ] && echo ${IP} || echo
 }
 
 config(){
@@ -139,7 +147,6 @@ install_ssmgr(){
 run_ssgmr(){
   npm i -g pm2
   pm2 --name "ss" -f start ssmgr -x -- -c ss.yml
-  pm2 --name "webgui" -f start ssmgr -x -- -c webgui.yml
   pm2 save && pm2 startup # startup on reboot
 }
 
@@ -181,4 +188,3 @@ main(){
 
 # start run script
 main
-
