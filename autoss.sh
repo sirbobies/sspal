@@ -57,14 +57,11 @@ install_shadowsocks(){
   if [[ ${PM} = "apt" ]]; then
     apt update -y
     apt-get install dnsutils -y
-    apt install net-tools -y
     apt install python3-pip -y
     echo "#!/bin/sh -e" >> /etc/rc.local
   elif [[ ${PM} = "yum" ]]; then
     yum update -y
     yum install epel-release -y
-    yum install bind-utils -y
-    yum install net-tools -y
     yum install python-setuptools -y && easy_install pip3
     yum install python3-pip -y
     chmod +x /etc/rc.d/rc.local
