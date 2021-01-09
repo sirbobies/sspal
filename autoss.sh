@@ -56,7 +56,6 @@ install_shadowsocks(){
   #statements
   if [[ ${PM} = "apt" ]]; then
     apt update -y
-    apt install -y libsodium-dev
     apt-get install dnsutils -y
     apt install net-tools -y
     apt install python3-pip -y
@@ -65,7 +64,6 @@ install_shadowsocks(){
   elif [[ ${PM} = "yum" ]]; then
     yum update -y
     yum install epel-release -y
-    yum install -y libsodium
     yum install bind-utils -y
     yum install net-tools -y
     yum install python-setuptools -y && easy_install pip3
@@ -81,9 +79,7 @@ install_shadowsocks(){
 # Get public IP address
 get_ip(){
     local IP=$(dig +short myip.opendns.com @resolver1.opendns.com)
-    [ -z ${IP} ] && IP=$( wget -qO- -t1 -T2 ipv4.icanhazip.com )
-    [ -z ${IP} ] && IP=$( wget -qO- -t1 -T2 ipinfo.io/ip )
-    [ ! -z ${IP} ] && echo ${IP} || echo
+    && echo ${IP} || echo
 }
 
 config(){
