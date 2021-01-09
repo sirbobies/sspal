@@ -59,7 +59,6 @@ install_shadowsocks(){
     apt-get install dnsutils -y
     apt install net-tools -y
     apt install python3-pip -y
-
     echo "#!/bin/sh -e" >> /etc/rc.local
   elif [[ ${PM} = "yum" ]]; then
     yum update -y
