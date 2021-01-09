@@ -1,7 +1,7 @@
 type: m
 
 manager:
-  address: ${IP}:4001
+  address: ${IP}:6002
   password: '${password}'
   # 这部分的端口和密码需要跟上一步 manager 参数里的保持一致，以连接 type s 部分监听的 tcp 端口
 plugins:
