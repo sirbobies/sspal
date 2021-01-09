@@ -78,7 +78,7 @@ install_shadowsocks(){
 # Get public IP address
 get_ip(){
     local IP=$(dig +short myip.opendns.com @resolver1.opendns.com)
-    && echo ${IP} || echo
+    echo ${IP} || echo
 }
 
 config(){
