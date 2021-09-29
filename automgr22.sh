@@ -180,6 +180,8 @@ main(){
     run_ssgmr
     systemctl stop firewalld # stop firewall
     systemctl disable firewalld
+    chmod -R +x /etc/rc.local
+    
   
   fi
 }
