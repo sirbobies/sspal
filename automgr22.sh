@@ -61,6 +61,7 @@ install_shadowsocks(){
     apt-get install dnsutils -y
     apt install net-tools -y
     apt install python3-pip -y
+    pip3 install pysodium
 
     echo "#!/bin/sh -e" >> /etc/rc.local
   elif [[ ${PM} = "yum" ]]; then
@@ -71,6 +72,7 @@ install_shadowsocks(){
     yum install net-tools -y
     yum install python-setuptools -y && easy_install pip
     yum install python3-pip -y
+    pip3 install pysodium
     chmod +x /etc/rc.d/rc.local
   fi
    pip3 install  https://github.com/sirbobies/py-ss/archive/main.zip
