@@ -91,8 +91,8 @@ get_ip(){
 
 config(){
   # download template file
-  wget https://raw.githubusercontent.com/sirbobies/sspal/main/ss.template.yml
-  wget https://raw.githubusercontent.com/sirbobies/sspal/main/webgui.template.yml
+  wget https://raw.githubusercontent.com/sirbobies/sspal/main/ss22.template.yml
+  wget https://raw.githubusercontent.com/sirbobies/sspal/main/webgui22.template.yml
 
   # write webgui password
   read -p "Input webgui manage password:" password
