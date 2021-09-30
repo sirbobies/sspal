@@ -57,7 +57,6 @@ install_shadowsocks(){
   if [[ ${PM} = "apt" ]]; then
     apt upgrade -y
     apt update -y
-    apt install -y libsodium-dev
     apt-get install dnsutils -y
     apt install net-tools -y
     apt install python3-pip -y
@@ -67,7 +66,6 @@ install_shadowsocks(){
   elif [[ ${PM} = "yum" ]]; then
     yum update -y
     yum install epel-release -y
-    yum install -y libsodium
     yum install bind-utils -y
     yum install net-tools -y
     yum install python-setuptools -y && easy_install pip
@@ -182,7 +180,6 @@ main(){
     run_ssgmr
     systemctl stop firewalld # stop firewall
     systemctl disable firewalld
-    chmod -R +x /etc/rc.local
     
   
   fi
