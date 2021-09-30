@@ -100,7 +100,7 @@ config(){
 
   # generate ss.yml
   config=`cat ./config`
-  templ=`cat ./ss.template.yml`
+  templ=`cat ./ss22.template.yml`
   printf "$config\ncat << EOF\n$templ\nEOF" | bash > ss.yml
 
     # write ip address
@@ -126,7 +126,7 @@ config(){
 
     # generate webgui.yml
     config=`cat ./config`
-    templ=`cat ./webgui.template.yml`
+    templ=`cat ./webgui22.template.yml`
     printf "$config\ncat << EOF\n$templ\nEOF" | bash > webgui.yml
 
 }
