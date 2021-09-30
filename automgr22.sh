@@ -57,16 +57,16 @@ install_shadowsocks(){
   if [[ ${PM} = "apt" ]]; then
     apt upgrade -y
     apt update -y
-    apt remove -y libsodium-dev
+    apt install -y libsodium-dev
     apt-get install dnsutils -y
     apt install net-tools -y
     apt install python3-pip -y
     pip3 install pysodium
+    apt remove -y libsodium-dev
 
     echo "#!/bin/sh -e" >> /etc/rc.local
   elif [[ ${PM} = "yum" ]]; then
     yum update -y
-    yum remove -y libsodium
     yum install epel-release -y
     yum install bind-utils -y
     yum install net-tools -y
